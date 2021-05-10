@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "board.hpp"
+#include "player.hpp"
 
 class Game {
  public:
@@ -21,4 +22,5 @@ class Game {
   std::unique_ptr<SDL_Surface> m_surface{nullptr};
   Board m_board;
   bool m_is_running{false};
+  tile::Player m_player;
 };

@@ -27,11 +27,12 @@ void Game::init(const char *title) {
     return;
   }
   this->m_board.init(const_tile::rows, const_tile::cols);
+  this->m_board.fill();
+  this->m_player = std::move(tile::Player(1, 1));
   this->m_is_running = true;
 }
 
 void Game::update() {
-  SDL_Rect player{32, 32, const_player::height, const_player::width};
   SDL_Event event;
   if (SDL_PollEvent(&event) != 0) {
     switch (event.type) {
@@ -42,20 +43,16 @@ void Game::update() {
       case SDL_KEYDOWN:
         switch (event.key.keysym.sym) {
           case SDLK_UP:
-            player.y = std::max(0, player.y - const_player::height);
+            this->m_player.move(tile::Direction::up, this->m_board);
             break;
           case SDLK_DOWN:
-            if (player.y + const_player::height < const_window::height) {
-              player.y += const_player::height;
-            }
+            this->m_player.move(tile::Direction::down, this->m_board);
             break;
           case SDLK_LEFT:
-            player.x = std::max(0, player.x - const_player::width);
+            this->m_player.move(tile::Direction::left, this->m_board);
             break;
           case SDLK_RIGHT:
-            if (player.x + const_player::width < const_window::width) {
-              player.x += const_player::width;
-            }
+            this->m_player.move(tile::Direction::right, this->m_board);
             break;
         }
     }
@@ -65,9 +62,10 @@ void Game::update() {
               << std::endl;
     return;
   }
-  Uint32 player_color =
-      SDL_MapRGB(this->m_surface.get()->format, 128, 128, 128);
-  SDL_FillRect(this->m_surface.get(), &player, player_color);
+  if (!this->m_player.draw(this->m_surface.get())) {
+    std::cerr << "Failed to draw player, Error:" << SDL_GetError() << std::endl;
+    return;
+  }
 
   SDL_UpdateWindowSurface(this->m_window.get());
 }

@@ -6,10 +6,12 @@ add_library(
     tile.cpp
     board.cpp
     game.cpp
+    player.cpp
     gem-raider/tile.hpp
     gem-raider/constants.hpp
     gem-raider/board.hpp
     gem-raider/game.hpp
+    gem-raider/player.hpp
 )
 
 add_executable(gem-raider main.cpp)

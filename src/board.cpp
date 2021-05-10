@@ -9,9 +9,9 @@ namespace const_tile = constants::tile;
 namespace const_board = constants::board;
 
 void Board::init(std::uint8_t rows, std::uint8_t cols) noexcept {
-  m_tiles.resize(rows);
+  this->m_tiles.resize(rows);
   for (std::uint8_t r = 0; r < rows; r++) {
-    m_tiles[r].resize(cols);
+    this->m_tiles[r].resize(cols);
   }
 }
 
