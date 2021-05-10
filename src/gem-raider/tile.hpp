@@ -75,7 +75,7 @@ class Tile {
         m_col(std::move(other.m_col)),
         m_color(std::move(other.m_color)) {}
 
-  Tile &operator=(Tile &&other) {
+  Tile &operator=(Tile &&other) noexcept {
     if (&other != this) {
       this->m_type = std::move(other.m_type);
       this->m_row = std::move(other.m_row);
@@ -86,7 +86,7 @@ class Tile {
   }
 
   void move(std::vector<std::vector<Tile>> &tile_map, Direction direction);
-  [[nodiscard]] Color getColor() const { return this->m_color; }
+  [[nodiscard]] Color getColor() const noexcept { return this->m_color; }
   friend std::ostream &operator<<(std::ostream &out, const Tile &tile);
 
  private:
