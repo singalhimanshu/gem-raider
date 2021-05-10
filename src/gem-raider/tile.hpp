@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <ostream>
 #include <vector>
 
 namespace tile {
@@ -49,6 +50,8 @@ class Tile {
     }
   }
 
+  virtual ~Tile() = default;
+
   Tile(Tile &other)
       : m_type(other.m_type),
         m_row(other.m_row),
@@ -84,6 +87,7 @@ class Tile {
 
   void move(std::vector<std::vector<Tile>> &tile_map, Direction direction);
   [[nodiscard]] Color getColor() const { return this->m_color; }
+  friend std::ostream &operator<<(std::ostream &out, const Tile &tile);
 
  private:
   Type m_type;

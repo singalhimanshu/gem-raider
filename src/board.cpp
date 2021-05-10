@@ -42,3 +42,13 @@ void Board::fill() {
   }
   return true;
 }
+
+std::ostream &operator<<(std::ostream &out, const Board &board) {
+  for (const auto &tile_row : board.m_tiles) {
+    for (const auto &tile : tile_row) {
+      std::cout << tile << " ";
+    }
+    std::cout << std::endl;
+  }
+  return out;
+}

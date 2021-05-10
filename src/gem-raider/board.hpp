@@ -2,6 +2,7 @@
 
 #include <SDL2/SDL.h>
 
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -18,8 +19,9 @@ class Board {
     }
   }
 
-  void fill();
+  void fill() noexcept;
   [[nodiscard]] bool draw(SDL_Surface *surface);
+  friend std::ostream &operator<<(std::ostream &out, const Board &board);
 
  private:
   std::vector<std::vector<tile::Tile>> m_tiles;
