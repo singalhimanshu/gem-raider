@@ -52,14 +52,14 @@ class Tile {
 
   virtual ~Tile() = default;
 
-  Tile(Tile &other)
+  Tile(const Tile &other)
       : m_type(other.m_type),
         m_row(other.m_row),
         m_col(other.m_col),
         m_color(other.m_color) {}
 
   // TODO: See if copy-swap idiom is possible
-  Tile &operator=(const Tile &other) {
+  Tile &operator=(const Tile &other) noexcept {
     if (this != &other) {
       this->m_type = other.m_type;
       this->m_row = other.m_row;
