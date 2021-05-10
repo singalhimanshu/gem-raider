@@ -5,9 +5,11 @@ add_library(
     gem-raider-lib
     tile.cpp
     board.cpp
+    game.cpp
     gem-raider/tile.hpp
     gem-raider/constants.hpp
     gem-raider/board.hpp
+    gem-raider/game.hpp
 )
 
 add_executable(gem-raider main.cpp)

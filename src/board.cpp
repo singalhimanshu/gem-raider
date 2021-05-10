@@ -8,6 +8,13 @@
 namespace const_tile = constants::tile;
 namespace const_board = constants::board;
 
+void Board::init(std::uint8_t rows, std::uint8_t cols) noexcept {
+  m_tiles.resize(rows);
+  for (std::uint8_t r = 0; r < rows; r++) {
+    m_tiles[r].resize(cols);
+  }
+}
+
 void Board::fill() noexcept {
   std::size_t raw_board_idx = 0;
   std::uint8_t rows = this->m_tiles.size();
