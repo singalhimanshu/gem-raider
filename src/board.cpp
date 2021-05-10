@@ -8,8 +8,8 @@
 namespace const_tile = constants::tile;
 namespace const_board = constants::board;
 
-void Board::fill() {
-  std::uint8_t raw_board_idx = 0;
+void Board::fill() noexcept {
+  std::size_t raw_board_idx = 0;
   std::uint8_t rows = this->m_tiles.size();
   std::uint8_t cols = this->m_tiles[0].size();
   assert(const_board::raw_board.size() == (rows * cols));
