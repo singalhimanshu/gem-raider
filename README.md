@@ -1,4 +1,4 @@
-# gem-miner
+# gem-raider
 
 A gem raider game written in C++.
 
