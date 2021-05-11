@@ -20,8 +20,9 @@ void Game::init(const char *title) {
     std::cerr << "Failed to create SDL window: " << SDL_GetError() << std::endl;
     return;
   }
-  this->m_surface.reset(SDL_GetWindowSurface(this->m_window.get()));
-  if (!this->m_surface) {
+
+  this->m_surface = SDL_GetWindowSurface(this->m_window.get());
+  if (this->m_surface == nullptr) {
     std::cerr << "Failed to create SDL surface: " << SDL_GetError()
               << std::endl;
     return;
@@ -57,12 +58,12 @@ void Game::update() {
         }
     }
   }
-  if (!this->m_board.draw(this->m_surface.get())) {
+  if (!this->m_board.draw(this->m_surface)) {
     std::cerr << "Failed to draw tile map, Error:" << SDL_GetError()
               << std::endl;
     return;
   }
-  if (!this->m_player.draw(this->m_surface.get())) {
+  if (!this->m_player.draw(this->m_surface)) {
     std::cerr << "Failed to draw player, Error:" << SDL_GetError() << std::endl;
     return;
   }
