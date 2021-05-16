@@ -30,6 +30,7 @@ class Board {
   void init(std::uint8_t rows, std::uint8_t cols) noexcept;
   void fill() noexcept;
   [[nodiscard]] bool draw(SDL_Surface *surface);
+  [[nodiscard]] bool isMoveable(std::uint8_t row, std::uint8_t col);
   friend std::ostream &operator<<(std::ostream &out, const Board &board);
 
  private:

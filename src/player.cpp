@@ -13,30 +13,33 @@ namespace gem_raider {
 }
 
 void Player::move(Direction direction, Board &board) {
+  auto is_moveable = [&](std::uint8_t row, std::uint8_t col) {
+    return board.isMoveable(row, col);
+  };
   switch (direction) {
     case Direction::left: {
-      if (this->m_x_pos - player::width >= 0) {
+      if (is_moveable(this->m_row, this->m_col - 1)) {
         this->m_x_pos -= player::width;
         this->m_col--;
       }
       break;
     }
     case Direction::right: {
-      if (this->m_x_pos + player::width < window::width) {
+      if (is_moveable(this->m_row, this->m_col + 1)) {
         this->m_x_pos += player::width;
         this->m_col++;
       }
       break;
     }
     case Direction::up: {
-      if (this->m_y_pos - player::height >= 0) {
+      if (is_moveable(this->m_row - 1, this->m_col)) {
         this->m_y_pos -= player::height;
         this->m_row--;
       }
       break;
     }
     case Direction::down: {
-      if (this->m_y_pos + player::height < window::height) {
+      if (is_moveable(this->m_row + 1, this->m_col)) {
         this->m_y_pos += player::height;
         this->m_row++;
       }

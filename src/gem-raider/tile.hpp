@@ -17,10 +17,11 @@ struct Color {
 
 class Tile {
  public:
+  Type type;
   Tile() = default;
   // TODO: Check if row and col are in bounds
   Tile(Type _type, std::uint8_t _row, std::uint8_t _col)
-      : m_type(_type), m_row(_row), m_col(_col) {
+      : type(_type), m_row(_row), m_col(_col) {
     switch (_type) {
       case Type::empty: {
         Color color{.red = 0, .green = 0, .blue = 0};
@@ -53,7 +54,7 @@ class Tile {
   virtual ~Tile() = default;
 
   Tile(const Tile &other)
-      : m_type(other.m_type),
+      : type(other.type),
         m_row(other.m_row),
         m_col(other.m_col),
         m_color(other.m_color) {}
@@ -61,7 +62,7 @@ class Tile {
   // TODO: See if copy-swap idiom is possible
   Tile &operator=(const Tile &other) noexcept {
     if (this != &other) {
-      this->m_type = other.m_type;
+      this->type = other.type;
       this->m_row = other.m_row;
       this->m_col = other.m_col;
       this->m_color = other.m_color;
@@ -70,14 +71,14 @@ class Tile {
   }
 
   Tile(Tile &&other) noexcept
-      : m_type(std::move(other.m_type)),
+      : type(std::move(other.type)),
         m_row(std::move(other.m_row)),
         m_col(std::move(other.m_col)),
         m_color(std::move(other.m_color)) {}
 
   Tile &operator=(Tile &&other) noexcept {
     if (&other != this) {
-      this->m_type = std::move(other.m_type);
+      this->type = std::move(other.type);
       this->m_row = std::move(other.m_row);
       this->m_col = std::move(other.m_col);
       this->m_color = std::move(other.m_color);
@@ -90,7 +91,7 @@ class Tile {
   friend std::ostream &operator<<(std::ostream &out, const Tile &tile);
 
  private:
-  Type m_type;
+
   std::uint8_t m_row;
   std::uint8_t m_col;
   Color m_color;

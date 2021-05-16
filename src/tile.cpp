@@ -6,7 +6,7 @@
 
 namespace gem_raider {
 void Tile::move(std::vector<std::vector<Tile>> &tile_map, Direction direction) {
-  assert(this->m_type == Type::gem);
+  assert(this->type == Type::gem);
   // TODO: check for the previous tile is not a brick or cheese
   switch (direction) {
     case Direction::left: {
@@ -43,7 +43,7 @@ void Tile::move(std::vector<std::vector<Tile>> &tile_map, Direction direction) {
 }
 
 std::ostream &operator<<(std::ostream &out, const Tile &tile) {
-  switch (tile.m_type) {
+  switch (tile.type) {
     case Type::empty: {
       out << "Tile (type: empty, ";
       break;

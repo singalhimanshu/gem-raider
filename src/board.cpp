@@ -47,6 +47,14 @@ void Board::fill() noexcept {
   return true;
 }
 
+[[nodiscard]] bool Board::isMoveable(std::uint8_t row, std::uint8_t col) {
+  if((row >= 0) && (col >= 0) && (row < this->m_tiles.size()) &&
+     (col < this->m_tiles[0].size())) {
+  return this->m_tiles[row][col].type == Type::empty;
+  }
+  return false;
+}
+
 std::ostream &operator<<(std::ostream &out, const Board &board) {
   for (const auto &tile_row : board.m_tiles) {
     for (const auto &tile : tile_row) {
