@@ -91,7 +91,6 @@ class Tile {
   friend std::ostream &operator<<(std::ostream &out, const Tile &tile);
 
  private:
-
   std::uint8_t m_row;
   std::uint8_t m_col;
   Color m_color;

@@ -48,9 +48,9 @@ void Board::fill() noexcept {
 }
 
 [[nodiscard]] bool Board::isMoveable(std::uint8_t row, std::uint8_t col) {
-  if((row >= 0) && (col >= 0) && (row < this->m_tiles.size()) &&
-     (col < this->m_tiles[0].size())) {
-  return this->m_tiles[row][col].type == Type::empty;
+  if ((row >= 0) && (col >= 0) && (row < this->m_tiles.size()) &&
+      (col < this->m_tiles[0].size())) {
+    return this->m_tiles[row][col].type == Type::empty;
   }
   return false;
 }
