@@ -5,17 +5,15 @@
 #include "board.hpp"
 #include "constants.hpp"
 
-namespace const_player = constants::player;
-namespace const_tile = constants::tile;
+namespace gem_raider {
 
-namespace tile {
 class Player {
  public:
   Player() = default;
   Player(std::uint16_t row_, std::uint16_t col_) : m_row(row_), m_col(col_) {
-    assert((row_ < const_tile::rows) && (col_ < const_tile::cols));
-    m_x_pos = col_ * const_player::width;
-    m_y_pos = row_ * const_player::height;
+    assert((row_ < tile::rows) && (col_ < tile::cols));
+    m_x_pos = col_ * player::width;
+    m_y_pos = row_ * player::height;
   }
   virtual ~Player() = default;
 
@@ -50,4 +48,4 @@ class Player {
   std::uint8_t m_row{0};
   std::uint8_t m_col{0};
 };
-}  // namespace tile
+}  // namespace gem_raider

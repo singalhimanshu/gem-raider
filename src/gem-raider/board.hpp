@@ -8,6 +8,8 @@
 
 #include "tile.hpp"
 
+namespace gem_raider {
+
 class Board {
  public:
   Board() = default;
@@ -31,5 +33,6 @@ class Board {
   friend std::ostream &operator<<(std::ostream &out, const Board &board);
 
  private:
-  std::vector<std::vector<tile::Tile>> m_tiles;
+  std::vector<std::vector<Tile>> m_tiles;
 };
+}  // namespace gem_raider

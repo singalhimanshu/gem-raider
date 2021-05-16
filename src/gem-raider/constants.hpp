@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace constants {
+namespace gem_raider {
 
 namespace window {
 constexpr inline int height = 640;
@@ -44,4 +44,4 @@ const std::string raw_board =
 100000000000001\
 111111141111111";
 }
-}  // namespace constants
+}  // namespace gem_raider

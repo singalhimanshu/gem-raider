@@ -12,7 +12,7 @@
 constexpr int fps = 60;
 
 int main(int argc, char *argv[]) {
-  Game game;
+  gem_raider::Game game;
   game.init("gem-raider");
 
   Uint32 frame_time = 0;

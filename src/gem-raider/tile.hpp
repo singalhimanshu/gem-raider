@@ -3,7 +3,7 @@
 #include <ostream>
 #include <vector>
 
-namespace tile {
+namespace gem_raider {
 
 enum class Type : std::uint8_t { empty, brick, cheese, gem, goal };
 
@@ -95,4 +95,4 @@ class Tile {
   std::uint8_t m_col;
   Color m_color;
 };
-}  // namespace tile
+}  // namespace gem_raider

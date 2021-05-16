@@ -7,6 +7,8 @@
 #include "board.hpp"
 #include "player.hpp"
 
+namespace gem_raider {
+
 class Game {
  public:
   Game() = default;
@@ -22,5 +24,6 @@ class Game {
   SDL_Surface *m_surface{nullptr};
   Board m_board;
   bool m_is_running{false};
-  tile::Player m_player;
+  Player m_player;
 };
+}  // namespace gem_raider

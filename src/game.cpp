@@ -4,18 +4,16 @@
 
 #include "gem-raider/constants.hpp"
 
-namespace const_window = constants::window;
-namespace const_tile = constants::tile;
-namespace const_player = constants::player;
+namespace gem_raider {
 
 void Game::init(const char *title) {
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
     return;
   }
-  this->m_window.reset(
-      SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                       const_window::width, const_window::height, 0));
+  this->m_window.reset(SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED,
+                                        SDL_WINDOWPOS_CENTERED, window::width,
+                                        window::height, 0));
   if (!this->m_window) {
     std::cerr << "Failed to create SDL window: " << SDL_GetError() << std::endl;
     return;
@@ -27,9 +25,9 @@ void Game::init(const char *title) {
               << std::endl;
     return;
   }
-  this->m_board.init(const_tile::rows, const_tile::cols);
+  this->m_board.init(tile::rows, tile::cols);
   this->m_board.fill();
-  this->m_player = std::move(tile::Player(1, 1));
+  this->m_player = std::move(Player(1, 1));
   this->m_is_running = true;
 }
 
@@ -44,16 +42,16 @@ void Game::update() {
       case SDL_KEYDOWN:
         switch (event.key.keysym.sym) {
           case SDLK_UP:
-            this->m_player.move(tile::Direction::up, this->m_board);
+            this->m_player.move(Direction::up, this->m_board);
             break;
           case SDLK_DOWN:
-            this->m_player.move(tile::Direction::down, this->m_board);
+            this->m_player.move(Direction::down, this->m_board);
             break;
           case SDLK_LEFT:
-            this->m_player.move(tile::Direction::left, this->m_board);
+            this->m_player.move(Direction::left, this->m_board);
             break;
           case SDLK_RIGHT:
-            this->m_player.move(tile::Direction::right, this->m_board);
+            this->m_player.move(Direction::right, this->m_board);
             break;
         }
     }
@@ -70,3 +68,4 @@ void Game::update() {
 
   SDL_UpdateWindowSurface(this->m_window.get());
 }
+}  // namespace gem_raider

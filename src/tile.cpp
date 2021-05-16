@@ -4,7 +4,7 @@
 #include <cassert>
 #include <cstddef>
 
-namespace tile {
+namespace gem_raider {
 void Tile::move(std::vector<std::vector<Tile>> &tile_map, Direction direction) {
   assert(this->m_type == Type::gem);
   // TODO: check for the previous tile is not a brick or cheese
@@ -71,4 +71,4 @@ std::ostream &operator<<(std::ostream &out, const Tile &tile) {
       << ", blue=" << unsigned(tile.m_color.blue) << "))";
   return out;
 }
-}  // namespace tile
+}  // namespace gem_raider
