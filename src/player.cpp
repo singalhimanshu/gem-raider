@@ -13,38 +13,100 @@ namespace gem_raider {
 }
 
 void Player::move(Direction direction, Board &board) {
-  auto is_moveable = [&](std::uint8_t row, std::uint8_t col) {
-    return board.isMoveable(row, col);
-  };
   switch (direction) {
     case Direction::left: {
-      if (is_moveable(this->m_row, this->m_col - 1)) {
-        this->m_x_pos -= player::width;
-        this->m_col--;
+      Type type = board.getTileType(this->m_row, this->m_col - 1);
+      switch (type) {
+        case Type::gem: {
+          if (!board.moveTile(this->m_row, this->m_col - 1, Direction::left)) {
+            break;
+          } else {
+            Direction maybe_dest_direction =
+                board.levelCompleted(this->m_row, this->m_col - 2);
+            if (maybe_dest_direction != Direction::none) {
+              board.dest_reached = true;
+              return;
+            }
+          }
+        }
+        case Type::empty: {
+          this->m_x_pos -= player::width;
+          this->m_col--;
+          break;
+        }
       }
       break;
     }
     case Direction::right: {
-      if (is_moveable(this->m_row, this->m_col + 1)) {
-        this->m_x_pos += player::width;
-        this->m_col++;
+      Type type = board.getTileType(this->m_row, this->m_col + 1);
+      switch (type) {
+        case Type::gem: {
+          if (!board.moveTile(this->m_row, this->m_col + 1, Direction::right)) {
+            break;
+          } else {
+            Direction maybe_dest_direction =
+                board.levelCompleted(this->m_row, this->m_col + 2);
+            if (maybe_dest_direction != Direction::none) {
+              board.dest_reached = true;
+              return;
+            }
+          }
+          case Type::empty: {
+            this->m_x_pos += player::width;
+            this->m_col++;
+            break;
+          }
+        }
       }
       break;
     }
     case Direction::up: {
-      if (is_moveable(this->m_row - 1, this->m_col)) {
-        this->m_y_pos -= player::height;
-        this->m_row--;
+      Type type = board.getTileType(this->m_row - 1, this->m_col);
+      switch (type) {
+        case Type::gem: {
+          if (!board.moveTile(this->m_row - 1, this->m_col, Direction::up)) {
+            break;
+          } else {
+            Direction maybe_dest_direction =
+                board.levelCompleted(this->m_row - 2, this->m_col);
+            if (maybe_dest_direction != Direction::none) {
+              board.dest_reached = true;
+              return;
+            }
+          }
+          case Type::empty: {
+            this->m_y_pos -= player::height;
+            this->m_row--;
+            break;
+          }
+        }
       }
       break;
     }
     case Direction::down: {
-      if (is_moveable(this->m_row + 1, this->m_col)) {
-        this->m_y_pos += player::height;
-        this->m_row++;
+      Type type = board.getTileType(this->m_row + 1, this->m_col);
+      switch (type) {
+        case Type::gem: {
+          if (!board.moveTile(this->m_row + 1, this->m_col, Direction::down)) {
+            break;
+          } else {
+            Direction maybe_dest_direction =
+                board.levelCompleted(this->m_row + 2, this->m_col);
+            if (maybe_dest_direction != Direction::none) {
+              board.dest_reached = true;
+              return;
+            }
+          }
+          case Type::empty: {
+            this->m_y_pos += player::height;
+            this->m_row++;
+            break;
+          }
+        }
       }
       break;
     }
   }
 }
+
 }  // namespace gem_raider

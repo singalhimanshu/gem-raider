@@ -47,12 +47,67 @@ void Board::fill() noexcept {
   return true;
 }
 
-[[nodiscard]] bool Board::isMoveable(std::uint8_t row, std::uint8_t col) {
-  if ((row >= 0) && (col >= 0) && (row < this->m_tiles.size()) &&
-      (col < this->m_tiles[0].size())) {
-    return this->m_tiles[row][col].type == Type::empty;
+Type Board::getTileType(std::uint8_t row, std::uint8_t col) {
+  if (this->m_isOutOfBounds(row, col)) {
+    return Type::brick;
   }
-  return false;
+  return this->m_tiles[row][col].type;
+}
+
+[[nodiscard]] bool Board::moveTile(std::uint8_t row, std::uint8_t col,
+                                   Direction direction) {
+  if (this->m_isOutOfBounds(row, col)) {
+    return false;
+  }
+  bool moved = false;
+  switch (direction) {
+    case Direction::left: {
+      if (getTileType(row, col - 1) == Type::empty) {
+        std::swap(this->m_tiles[row][col], this->m_tiles[row][col - 1]);
+        moved = true;
+      }
+      break;
+    }
+    case Direction::right: {
+      std::size_t col_size = this->m_tiles[0].size();
+      if (getTileType(row, col + 1) == Type::empty) {
+        std::swap(this->m_tiles[row][col], this->m_tiles[row][col + 1]);
+        moved = true;
+      }
+      break;
+    }
+    case Direction::up: {
+      if (getTileType(row - 1, col) == Type::empty) {
+        std::swap(this->m_tiles[row][col], this->m_tiles[row - 1][col]);
+        moved = true;
+      }
+      break;
+    }
+    case Direction::down: {
+      std::size_t row_size = this->m_tiles.size();
+      if (getTileType(row + 1, col) == Type::empty) {
+        std::swap(this->m_tiles[row][col], this->m_tiles[row + 1][col]);
+        moved = true;
+      }
+      break;
+    }
+  }
+  return moved;
+}
+
+Direction Board::levelCompleted(std::uint8_t row, std::uint8_t col) {
+  if (!this->m_isOutOfBounds(row, col)) {
+    if (getTileType(row, col - 1) == Type::goal) {
+      return Direction::left;
+    } else if (getTileType(row, col + 1) == Type::goal) {
+      return Direction::right;
+    } else if (getTileType(row - 1, col) == Type::goal) {
+      return Direction::up;
+    } else if (getTileType(row + 1, col) == Type::goal) {
+      return Direction::down;
+    }
+  }
+  return Direction::none;
 }
 
 std::ostream &operator<<(std::ostream &out, const Board &board) {
@@ -64,4 +119,5 @@ std::ostream &operator<<(std::ostream &out, const Board &board) {
   }
   return out;
 }
+
 }  // namespace gem_raider

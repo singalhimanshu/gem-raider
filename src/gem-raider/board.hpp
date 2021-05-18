@@ -12,6 +12,7 @@ namespace gem_raider {
 
 class Board {
  public:
+  bool dest_reached{false};
   Board() = default;
 
   virtual ~Board() = default;
@@ -30,10 +31,16 @@ class Board {
   void init(std::uint8_t rows, std::uint8_t cols) noexcept;
   void fill() noexcept;
   [[nodiscard]] bool draw(SDL_Surface *surface);
-  [[nodiscard]] bool isMoveable(std::uint8_t row, std::uint8_t col);
+  Type getTileType(std::uint8_t row, std::uint8_t col);
+  [[nodiscard]] bool moveTile(std::uint8_t row, std::uint8_t col, Direction direction);
+  [[nodiscard]] Direction levelCompleted(std::uint8_t row, std::uint8_t col);
   friend std::ostream &operator<<(std::ostream &out, const Board &board);
 
  private:
+  [[nodiscard]] bool m_isOutOfBounds(std::uint8_t row, std::uint8_t col) {
+    return ((row < 0) && (col < 0) && (row >= this->m_tiles.size()) &&
+            (col >= this->m_tiles[0].size()));
+  }
   std::vector<std::vector<Tile>> m_tiles;
 };
 }  // namespace gem_raider

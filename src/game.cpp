@@ -56,6 +56,11 @@ void Game::update() {
         }
     }
   }
+  if (this->m_board.dest_reached) {
+    this->m_is_running = false;
+    std::cout << "game over" << std::endl;
+    return;
+  }
   if (!this->m_board.draw(this->m_surface)) {
     std::cerr << "Failed to draw tile map, Error:" << SDL_GetError()
               << std::endl;

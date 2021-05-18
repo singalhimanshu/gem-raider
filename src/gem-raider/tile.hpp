@@ -7,7 +7,7 @@ namespace gem_raider {
 
 enum class Type : std::uint8_t { empty, brick, cheese, gem, goal };
 
-enum class Direction { left, right, up, down };
+enum class Direction { left, right, up, down, none };
 
 struct Color {
   std::uint8_t red;
@@ -86,7 +86,6 @@ class Tile {
     return *this;
   }
 
-  void move(std::vector<std::vector<Tile>> &tile_map, Direction direction);
   [[nodiscard]] Color getColor() const noexcept { return this->m_color; }
   friend std::ostream &operator<<(std::ostream &out, const Tile &tile);
 
