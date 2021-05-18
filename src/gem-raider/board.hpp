@@ -32,7 +32,8 @@ class Board {
   void fill() noexcept;
   [[nodiscard]] bool draw(SDL_Surface *surface);
   Type getTileType(std::uint8_t row, std::uint8_t col);
-  [[nodiscard]] bool moveTile(std::uint8_t row, std::uint8_t col, Direction direction);
+  [[nodiscard]] bool moveTile(std::uint8_t row, std::uint8_t col,
+                              Direction direction);
   [[nodiscard]] Direction levelCompleted(std::uint8_t row, std::uint8_t col);
   friend std::ostream &operator<<(std::ostream &out, const Board &board);
 
