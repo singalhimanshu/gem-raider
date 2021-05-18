@@ -19,5 +19,5 @@ target_link_libraries(
     gem-raider
     PRIVATE project_options
     gem-raider-lib
-    ${SDL2_LIBRARIES}
+    PRIVATE SDL2::SDL2
 )
