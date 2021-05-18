@@ -73,4 +73,5 @@ void Game::update() {
 
   SDL_UpdateWindowSurface(this->m_window.get());
 }
+
 }  // namespace gem_raider

@@ -25,7 +25,5 @@ int main(int argc, char *argv[]) {
       SDL_Delay((1000 / fps) - frame_time);
     }
   }
-
-  SDL_Quit();
   return 0;
 }
