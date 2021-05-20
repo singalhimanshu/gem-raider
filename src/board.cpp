@@ -28,15 +28,14 @@ void Board::fill() noexcept {
   }
 }
 
-[[nodiscard]] bool Board::draw(SDL_Surface *surface) {
+[[nodiscard]] bool Board::draw(SDL_Renderer *renderer) {
   int tile_x_pos = 0, tile_y_pos = 0;
   for (const auto &tiles : this->m_tiles) {
     for (const auto &tile : tiles) {
-      SDL_Rect tile_rect{tile_x_pos, tile_y_pos, tile::width, tile::height};
       Color color = tile.getColor();
-      Uint32 sdl_color =
-          SDL_MapRGB(surface->format, color.red, color.green, color.blue);
-      if (SDL_FillRect(surface, &tile_rect, sdl_color) < 0) {
+      SDL_SetRenderDrawColor(renderer, color.red, color.green, color.blue, 0);
+      SDL_Rect tile_rect{tile_x_pos, tile_y_pos, tile::width, tile::height};
+      if (SDL_RenderFillRect(renderer, &tile_rect) < 0) {
         return false;
       }
       tile_x_pos += tile::height;

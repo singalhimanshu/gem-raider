@@ -39,7 +39,7 @@ class Player {
     return *this;
   }
 
-  [[nodiscard]] bool draw(SDL_Surface *surface);
+  [[nodiscard]] bool draw(SDL_Renderer *renderer);
   void move(Direction direction, Board &board);
 
  private:

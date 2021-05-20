@@ -30,7 +30,7 @@ class Board {
 
   void init(std::uint8_t rows, std::uint8_t cols) noexcept;
   void fill() noexcept;
-  [[nodiscard]] bool draw(SDL_Surface *surface);
+  [[nodiscard]] bool draw(SDL_Renderer *renderer);
   Type getTileType(std::uint8_t row, std::uint8_t col);
   [[nodiscard]] bool moveTile(std::uint8_t row, std::uint8_t col,
                               Direction direction);

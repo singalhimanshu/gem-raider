@@ -12,7 +12,7 @@ namespace gem_raider {
 class Game {
  public:
   Game() = default;
-  virtual ~Game() { SDL_FreeSurface(this->m_surface); }
+  virtual ~Game() { SDL_Quit(); }
   void init(const char *title);
   void update();
   [[nodiscard]] inline bool is_running() { return this->m_is_running; }
@@ -20,7 +20,8 @@ class Game {
  private:
   std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> m_window{
       nullptr, SDL_DestroyWindow};
-  SDL_Surface *m_surface{nullptr};
+  std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> m_renderer{
+      nullptr, SDL_DestroyRenderer};
   Board m_board;
   bool m_is_running{false};
   Player m_player;
