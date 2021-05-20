@@ -12,7 +12,7 @@ namespace gem_raider {
 class Game {
  public:
   Game() = default;
-  virtual ~Game() { SDL_Quit(); }
+  virtual ~Game() = default;
   void init(const char *title);
   void update();
   [[nodiscard]] inline bool is_running() { return this->m_is_running; }
