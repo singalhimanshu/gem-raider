@@ -13,7 +13,7 @@ class Player {
   Player(std::uint16_t row_, std::uint16_t col_) : m_row(row_), m_col(col_) {
     assert((row_ < tile::rows) && (col_ < tile::cols));
     m_x_pos = col_ * player::width;
-    m_y_pos = row_ * player::height;
+    m_y_pos = row_ * player::height + window::top_bar_height;
   }
   virtual ~Player() = default;
 

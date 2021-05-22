@@ -29,7 +29,7 @@ void Board::fill() noexcept {
 }
 
 [[nodiscard]] bool Board::draw(SDL_Renderer *renderer) {
-  int tile_x_pos = 0, tile_y_pos = 0;
+  int tile_x_pos = 0, tile_y_pos = window::top_bar_height;
   for (const auto &tiles : this->m_tiles) {
     for (const auto &tile : tiles) {
       Color color = tile.getColor();

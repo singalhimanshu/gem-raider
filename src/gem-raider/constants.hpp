@@ -6,6 +6,8 @@ namespace gem_raider {
 namespace window {
 constexpr inline int height = 640;
 constexpr inline int width = 480;
+constexpr inline int top_bar_height = 30;
+constexpr inline int top_bar_width = 480;
 }  // namespace window
 
 namespace player {

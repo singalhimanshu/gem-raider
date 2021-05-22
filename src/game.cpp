@@ -11,9 +11,9 @@ void Game::init(const char *title) {
     SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
     return;
   }
-  this->m_window.reset(SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED,
-                                        SDL_WINDOWPOS_CENTERED, window::width,
-                                        window::height, 0));
+  this->m_window.reset(SDL_CreateWindow(
+      title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window::width,
+      window::height + window::top_bar_height, 0));
   if (!this->m_window) {
     std::cerr << "Failed to create SDL window: " << SDL_GetError() << std::endl;
     return;
