@@ -41,6 +41,7 @@ class Player {
 
   [[nodiscard]] bool draw(SDL_Renderer *renderer);
   void move(Direction direction, Board &board);
+  void reset();
 
  private:
   std::uint16_t m_x_pos{0};

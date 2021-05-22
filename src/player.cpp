@@ -109,4 +109,11 @@ void Player::move(Direction direction, Board &board) {
   }
 }
 
+void Player::reset() {
+  this->m_row = 1;
+  this->m_col = 1;
+  m_x_pos = this->m_row * player::width;
+  m_y_pos = this->m_col * player::height;
+}
+
 }  // namespace gem_raider

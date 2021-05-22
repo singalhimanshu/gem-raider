@@ -35,6 +35,7 @@ class Board {
   [[nodiscard]] bool moveTile(std::uint8_t row, std::uint8_t col,
                               Direction direction);
   [[nodiscard]] Direction levelCompleted(std::uint8_t row, std::uint8_t col);
+  void reset() { this->fill(); }
   friend std::ostream &operator<<(std::ostream &out, const Board &board);
 
  private:

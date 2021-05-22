@@ -53,6 +53,9 @@ void Game::update() {
           case SDLK_RIGHT:
             this->m_player.move(Direction::right, this->m_board);
             break;
+          case SDLK_r:
+            this->reset();
+            break;
         }
     }
   }
@@ -73,6 +76,11 @@ void Game::update() {
   }
   SDL_RenderPresent(this->m_renderer.get());
   SDL_UpdateWindowSurface(this->m_window.get());
+}
+
+void Game::reset() {
+  this->m_board.reset();
+  this->m_player.reset();
 }
 
 }  // namespace gem_raider
