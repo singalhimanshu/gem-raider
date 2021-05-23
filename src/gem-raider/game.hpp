@@ -5,14 +5,14 @@
 #include <memory>
 
 #include "board.hpp"
+#include "button.hpp"
 #include "player.hpp"
 
 namespace gem_raider {
-
 class Game {
  public:
   Game() = default;
-  virtual ~Game() = default;
+  virtual ~Game() { TTF_Quit(); };
   void init(const char *title);
   void update();
   [[nodiscard]] inline bool is_running() { return this->m_is_running; }
@@ -26,5 +26,6 @@ class Game {
   Board m_board;
   bool m_is_running{false};
   Player m_player;
+  Button m_reset_button;
 };
 }  // namespace gem_raider
