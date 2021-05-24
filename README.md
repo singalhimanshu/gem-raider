@@ -34,5 +34,5 @@ make
 From the project root execute the following command - 
 
 ``` shell
-./build/bin/gem-raider
+./build/gem-raider
 ```
