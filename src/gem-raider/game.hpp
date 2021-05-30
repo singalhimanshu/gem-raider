@@ -6,7 +6,6 @@
 
 #include "board.hpp"
 #include "button.hpp"
-#include "player.hpp"
 
 namespace gem_raider {
 class Game {
@@ -25,7 +24,6 @@ class Game {
       nullptr, SDL_DestroyRenderer};
   Board m_board;
   bool m_is_running{false};
-  Player m_player;
   Button m_reset_button;
 };
 }  // namespace gem_raider

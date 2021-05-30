@@ -26,6 +26,10 @@ std::ostream &operator<<(std::ostream &out, const Tile &tile) {
       out << "Tile (type: goal, ";
       break;
     }
+    case Type::player: {
+      out << "Tile (type: goal, ";
+      break;
+    }
   }
   out << "row: " << unsigned(tile.m_row) << ", col: " << unsigned(tile.m_col)
       << ", color: (red=" << unsigned(tile.m_color.red)

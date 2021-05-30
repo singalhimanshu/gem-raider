@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 add_executable(
     gem-raider-test
-    player_test.cpp)
+    board_test.cpp)
 
 target_include_directories(
     gem-raider-test PUBLIC ${PROJECT_SOURCE_DIR}/vendor/googletest/googletest/include

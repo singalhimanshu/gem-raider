@@ -22,6 +22,10 @@ void Board::fill() noexcept {
   for (std::uint8_t r = 0; r < rows; r++) {
     for (std::uint8_t c = 0; c < cols; c++) {
       Type type = static_cast<Type>(board::raw_board[raw_board_idx] - '0');
+      if (type == Type::player) {
+        this->m_player_row = r;
+        this->m_player_col = c;
+      }
       this->m_tiles[r][c] = std::move(Tile(type, r, c));
       raw_board_idx++;
     }
@@ -96,7 +100,7 @@ Type Board::getTileType(std::uint8_t row, std::uint8_t col) {
   return moved;
 }
 
-Direction Board::levelCompleted(std::uint8_t row, std::uint8_t col) {
+Direction Board::isLevelCompleted(std::uint8_t row, std::uint8_t col) {
   if (!this->m_isOutOfBounds(row, col)) {
     if (getTileType(row, col - 1) == Type::goal) {
       return Direction::left;
@@ -109,6 +113,89 @@ Direction Board::levelCompleted(std::uint8_t row, std::uint8_t col) {
     }
   }
   return Direction::none;
+}
+
+void Board::movePlayer(Direction direction) {
+  switch (direction) {
+    // TODO(singalhimanshu): remove repetition
+    case Direction::left: {
+      Type left_tile_type =
+          this->getTileType(this->m_player_row, this->m_player_col - 1);
+      if (left_tile_type == Type::gem &&
+          this->moveTile(this->m_player_row, this->m_player_col - 1,
+                         direction)) {
+        this->levelCompleted(this->m_player_row, this->m_player_col - 2);
+        assert(
+            this->moveTile(this->m_player_row, this->m_player_col, direction));
+        this->m_player_col--;
+      } else if (left_tile_type == Type::empty) {
+        assert(
+            this->moveTile(this->m_player_row, this->m_player_col, direction));
+        this->m_player_col--;
+      }
+      break;
+    }
+    case Direction::right: {
+      Type right_tile_type =
+          this->getTileType(this->m_player_row, this->m_player_col + 1);
+      if (right_tile_type == Type::gem &&
+          this->moveTile(this->m_player_row, this->m_player_col + 1,
+                         direction)) {
+        this->levelCompleted(this->m_player_row, this->m_player_col + 2);
+        assert(
+            this->moveTile(this->m_player_row, this->m_player_col, direction));
+        this->m_player_col++;
+      } else if (right_tile_type == Type::empty) {
+        assert(
+            this->moveTile(this->m_player_row, this->m_player_col, direction));
+        this->m_player_col++;
+      }
+      break;
+    }
+    case Direction::up: {
+      Type up_tile_type =
+          this->getTileType(this->m_player_row - 1, this->m_player_col);
+      if (up_tile_type == Type::gem &&
+          this->moveTile(this->m_player_row - 1, this->m_player_col,
+                         direction)) {
+        this->levelCompleted(this->m_player_row - 2, this->m_player_col);
+        assert(
+            this->moveTile(this->m_player_row, this->m_player_col, direction));
+        this->m_player_row--;
+      } else if (up_tile_type == Type::empty) {
+        assert(
+            this->moveTile(this->m_player_row, this->m_player_col, direction));
+        this->m_player_row--;
+      }
+      break;
+    }
+    case Direction::down: {
+      Type down_tile_type =
+          this->getTileType(this->m_player_row + 1, this->m_player_col);
+
+      if (down_tile_type == Type::gem &&
+          this->moveTile(this->m_player_row + 1, this->m_player_col,
+                         direction)) {
+        this->levelCompleted(this->m_player_row + 2, this->m_player_col);
+        assert(
+            this->moveTile(this->m_player_row, this->m_player_col, direction));
+        this->m_player_row++;
+      } else if (down_tile_type == Type::empty) {
+        assert(
+            this->moveTile(this->m_player_row, this->m_player_col, direction));
+        this->m_player_row++;
+      }
+      break;
+    }
+    default:
+      break;
+  }
+}
+
+void Board::levelCompleted(std::uint8_t gem_row, std::uint8_t gem_col) {
+  if (this->isLevelCompleted(gem_row, gem_col) != Direction::none) {
+    this->dest_reached = true;
+  }
 }
 
 std::ostream &operator<<(std::ostream &out, const Board &board) {

@@ -34,8 +34,11 @@ class Board {
   Type getTileType(std::uint8_t row, std::uint8_t col);
   [[nodiscard]] bool moveTile(std::uint8_t row, std::uint8_t col,
                               Direction direction);
-  [[nodiscard]] Direction levelCompleted(std::uint8_t row, std::uint8_t col);
+  [[nodiscard]] Direction isLevelCompleted(std::uint8_t row, std::uint8_t col);
   void reset() { this->fill(); }
+  void movePlayer(Direction direction);
+  void levelCompleted(std::uint8_t gem_row, std::uint8_t gem_col);
+
   friend std::ostream &operator<<(std::ostream &out, const Board &board);
 
  private:
@@ -44,5 +47,7 @@ class Board {
             (col >= this->m_tiles[0].size()));
   }
   std::vector<std::vector<Tile>> m_tiles;
+  std::uint8_t m_player_row{0};
+  std::uint8_t m_player_col{0};
 };
 }  // namespace gem_raider

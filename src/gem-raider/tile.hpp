@@ -5,7 +5,7 @@
 
 namespace gem_raider {
 
-enum class Type : std::uint8_t { empty, brick, cheese, gem, goal };
+enum class Type : std::uint8_t { empty, brick, cheese, gem, goal, player };
 
 enum class Direction { left, right, up, down, none };
 
@@ -45,6 +45,11 @@ class Tile {
       }
       case Type::goal: {
         Color color{.red = 25, .green = 77, .blue = 0};
+        this->m_color = color;
+        break;
+      }
+      case Type::player: {
+        Color color{.red = 128, .green = 128, .blue = 128};
         this->m_color = color;
         break;
       }

@@ -31,7 +31,6 @@ void Game::init(const char *title) {
   }
   this->m_board.init(tile::rows, tile::cols);
   this->m_board.fill();
-  this->m_player = std::move(Player(1, 1));
   this->m_reset_button =
       std::move(Button(100, 30, "RESET(r)", window::width - 100, 0));
   this->m_is_running = true;
@@ -48,16 +47,16 @@ void Game::update() {
       case SDL_KEYDOWN: {
         switch (event.key.keysym.sym) {
           case SDLK_UP:
-            this->m_player.move(Direction::up, this->m_board);
+            this->m_board.movePlayer(Direction::up);
             break;
           case SDLK_DOWN:
-            this->m_player.move(Direction::down, this->m_board);
+            this->m_board.movePlayer(Direction::down);
             break;
           case SDLK_LEFT:
-            this->m_player.move(Direction::left, this->m_board);
+            this->m_board.movePlayer(Direction::left);
             break;
           case SDLK_RIGHT:
-            this->m_player.move(Direction::right, this->m_board);
+            this->m_board.movePlayer(Direction::right);
             break;
           case SDLK_r:
             this->reset();
@@ -99,18 +98,10 @@ void Game::update() {
     this->m_is_running = false;
     return;
   }
-  if (!this->m_player.draw(this->m_renderer.get())) {
-    std::cerr << "Failed to draw player, Error:" << SDL_GetError() << std::endl;
-    this->m_is_running = false;
-    return;
-  }
   SDL_RenderPresent(this->m_renderer.get());
   SDL_UpdateWindowSurface(this->m_window.get());
 }
 
-void Game::reset() {
-  this->m_board.reset();
-  this->m_player.reset();
-}
+void Game::reset() { this->m_board.reset(); }
 
 }  // namespace gem_raider

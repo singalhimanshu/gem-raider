@@ -9,14 +9,12 @@ add_library(
   tile.cpp
   board.cpp
   game.cpp
-  player.cpp
   button.cpp
   sdl_util.cpp
   gem-raider/tile.hpp
   gem-raider/constants.hpp
   gem-raider/board.hpp
   gem-raider/game.hpp
-  gem-raider/player.hpp
   gem-raider/button.hpp
   gem-raider/sdl_util.hpp
 )
