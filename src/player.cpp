@@ -34,6 +34,8 @@ void Player::move(Direction direction, Board &board) {
           this->m_col--;
           break;
         }
+        default:
+          break;
       }
       break;
     }
@@ -57,6 +59,8 @@ void Player::move(Direction direction, Board &board) {
             break;
           }
         }
+        default:
+          break;
       }
       break;
     }
@@ -80,6 +84,8 @@ void Player::move(Direction direction, Board &board) {
             break;
           }
         }
+        default:
+          break;
       }
       break;
     }
@@ -103,9 +109,13 @@ void Player::move(Direction direction, Board &board) {
             break;
           }
         }
+        default:
+          break;
       }
       break;
     }
+    default:
+      break;
   }
 }
 

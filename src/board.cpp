@@ -90,6 +90,8 @@ Type Board::getTileType(std::uint8_t row, std::uint8_t col) {
       }
       break;
     }
+    default:
+      break;
   }
   return moved;
 }
