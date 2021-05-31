@@ -1,7 +1,10 @@
 #pragma once
+#include <cassert>
 #include <cstdint>
 #include <ostream>
 #include <vector>
+
+#include "constants.hpp"
 
 namespace gem_raider {
 
@@ -19,9 +22,9 @@ class Tile {
  public:
   Type type;
   Tile() = default;
-  // TODO: Check if row and col are in bounds
   Tile(Type _type, std::uint8_t _row, std::uint8_t _col)
       : type(_type), m_row(_row), m_col(_col) {
+    assert((_row < tile::rows) && (_col < tile::cols));
     switch (_type) {
       case Type::empty: {
         Color color{.red = 0, .green = 0, .blue = 0};
