@@ -46,6 +46,8 @@ class Board {
     return ((row < 0) && (col < 0) && (row >= this->m_tiles.size()) &&
             (col >= this->m_tiles[0].size()));
   }
+  void m_movePlayerHelper(std::uint8_t row_neigh_offset,
+                          std::uint8_t col_neigh_offset, Direction direction);
   std::vector<std::vector<Tile>> m_tiles;
   std::uint8_t m_player_row{0};
   std::uint8_t m_player_col{0};

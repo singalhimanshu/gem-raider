@@ -117,78 +117,42 @@ Direction Board::isLevelCompleted(std::uint8_t row, std::uint8_t col) {
 
 void Board::movePlayer(Direction direction) {
   switch (direction) {
-    // TODO(singalhimanshu): remove repetition
-    case Direction::left: {
-      Type left_tile_type =
-          this->getTileType(this->m_player_row, this->m_player_col - 1);
-      if (left_tile_type == Type::gem &&
-          this->moveTile(this->m_player_row, this->m_player_col - 1,
-                         direction)) {
-        this->levelCompleted(this->m_player_row, this->m_player_col - 2);
-        assert(
-            this->moveTile(this->m_player_row, this->m_player_col, direction));
-        this->m_player_col--;
-      } else if (left_tile_type == Type::empty) {
-        assert(
-            this->moveTile(this->m_player_row, this->m_player_col, direction));
-        this->m_player_col--;
-      }
+    case Direction::left:
+      this->m_movePlayerHelper(0, -1, direction);
       break;
-    }
-    case Direction::right: {
-      Type right_tile_type =
-          this->getTileType(this->m_player_row, this->m_player_col + 1);
-      if (right_tile_type == Type::gem &&
-          this->moveTile(this->m_player_row, this->m_player_col + 1,
-                         direction)) {
-        this->levelCompleted(this->m_player_row, this->m_player_col + 2);
-        assert(
-            this->moveTile(this->m_player_row, this->m_player_col, direction));
-        this->m_player_col++;
-      } else if (right_tile_type == Type::empty) {
-        assert(
-            this->moveTile(this->m_player_row, this->m_player_col, direction));
-        this->m_player_col++;
-      }
+    case Direction::right:
+      this->m_movePlayerHelper(0, 1, direction);
       break;
-    }
-    case Direction::up: {
-      Type up_tile_type =
-          this->getTileType(this->m_player_row - 1, this->m_player_col);
-      if (up_tile_type == Type::gem &&
-          this->moveTile(this->m_player_row - 1, this->m_player_col,
-                         direction)) {
-        this->levelCompleted(this->m_player_row - 2, this->m_player_col);
-        assert(
-            this->moveTile(this->m_player_row, this->m_player_col, direction));
-        this->m_player_row--;
-      } else if (up_tile_type == Type::empty) {
-        assert(
-            this->moveTile(this->m_player_row, this->m_player_col, direction));
-        this->m_player_row--;
-      }
+    case Direction::up:
+      this->m_movePlayerHelper(-1, 0, direction);
       break;
-    }
-    case Direction::down: {
-      Type down_tile_type =
-          this->getTileType(this->m_player_row + 1, this->m_player_col);
-
-      if (down_tile_type == Type::gem &&
-          this->moveTile(this->m_player_row + 1, this->m_player_col,
-                         direction)) {
-        this->levelCompleted(this->m_player_row + 2, this->m_player_col);
-        assert(
-            this->moveTile(this->m_player_row, this->m_player_col, direction));
-        this->m_player_row++;
-      } else if (down_tile_type == Type::empty) {
-        assert(
-            this->moveTile(this->m_player_row, this->m_player_col, direction));
-        this->m_player_row++;
-      }
+    case Direction::down:
+      this->m_movePlayerHelper(1, 0, direction);
       break;
-    }
     default:
       break;
+  }
+}
+
+void Board::m_movePlayerHelper(std::uint8_t row_neigh_offset,
+                               std::uint8_t col_neigh_offset,
+                               Direction direction) {
+  std::uint8_t neigh_row = this->m_player_row + row_neigh_offset;
+  std::uint8_t neigh_col = this->m_player_col + col_neigh_offset;
+  Type neigh_tile_type = this->getTileType(neigh_row, neigh_col);
+
+  if (neigh_tile_type == Type::gem &&
+      this->moveTile(neigh_row, neigh_col, direction)) {
+    std::uint8_t gem_neigh_row = neigh_row + row_neigh_offset;
+    std::uint8_t gem_neigh_col = neigh_col + col_neigh_offset;
+    this->levelCompleted(gem_neigh_row, gem_neigh_col);
+    assert(this->moveTile(this->m_player_row, this->m_player_col, direction));
+    this->m_player_row = neigh_row;
+    this->m_player_col = neigh_col;
+  } else if (neigh_tile_type == Type::empty) {
+    assert(this->moveTile(this->m_player_row, this->m_player_col, direction));
+    this->m_player_row = neigh_row;
+    this->m_player_col = neigh_col;
   }
 }
 
