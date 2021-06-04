@@ -29,7 +29,7 @@ void Game::init(const char *title) {
               << std::endl;
     return;
   }
-  this->m_board.init(tile::rows, tile::cols);
+  this->m_board.init();
   this->m_board.fill();
   this->m_reset_button =
       std::move(Button(100, 30, "RESET(r)", window::width - 100, 0));

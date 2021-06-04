@@ -7,10 +7,10 @@
 
 namespace gem_raider {
 
-void Board::init(std::uint8_t rows, std::uint8_t cols) noexcept {
-  this->m_tiles.resize(rows);
-  for (std::uint8_t r = 0; r < rows; r++) {
-    this->m_tiles[r].resize(cols);
+void Board::init() noexcept {
+  this->m_tiles.resize(tile::rows);
+  for (std::uint8_t r = 0; r < tile::rows; r++) {
+    this->m_tiles[r].resize(tile::cols);
   }
 }
 
