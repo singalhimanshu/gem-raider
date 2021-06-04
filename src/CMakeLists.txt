@@ -2,8 +2,6 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(SDL2 REQUIRED sdl2 SDL2_ttf)
 include_directories(${SDL2_INCLUDE_DIRS})
 
-include_directories(gem-raider)
-
 add_library(
   gem-raider-lib
   tile.cpp
