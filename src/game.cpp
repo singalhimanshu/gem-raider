@@ -1,8 +1,6 @@
-#include <gem-raider/game.hpp>
-
-#include <iostream>
-
 #include <gem-raider/constants.hpp>
+#include <gem-raider/game.hpp>
+#include <iostream>
 
 namespace gem_raider {
 

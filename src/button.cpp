@@ -1,5 +1,4 @@
 #include <gem-raider/button.hpp>
-
 #include <gem-raider/game.hpp>
 #include <gem-raider/sdl_util.hpp>
 

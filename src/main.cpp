@@ -2,12 +2,11 @@
 
 #include <array>
 #include <fstream>
-#include <iostream>
-#include <string>
-
 #include <gem-raider/board.hpp>
 #include <gem-raider/constants.hpp>
 #include <gem-raider/game.hpp>
+#include <iostream>
+#include <string>
 
 constexpr int fps = 60;
 

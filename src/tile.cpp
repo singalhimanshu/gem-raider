@@ -1,7 +1,6 @@
-#include <gem-raider/tile.hpp>
-
 #include <algorithm>
 #include <cstddef>
+#include <gem-raider/tile.hpp>
 
 namespace gem_raider {
 std::ostream &operator<<(std::ostream &out, const Tile &tile) {

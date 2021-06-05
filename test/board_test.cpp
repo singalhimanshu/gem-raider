@@ -1,6 +1,6 @@
-#include <gem-raider/board.hpp>
-
 #include <gtest/gtest.h>
+
+#include <gem-raider/board.hpp>
 
 namespace gem_raider {
 TEST(board_test, board_boundary_tile_is_of_type_brick_or_gem) {
