@@ -8,7 +8,6 @@ add_executable(
 target_link_libraries(
   gem-raider-test
   gem-raider-lib
-  ${SDL2_LIBRARIES}
   gtest_main
 )
 

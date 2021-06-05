@@ -20,8 +20,8 @@ add_library(
 target_include_directories(gem-raider-lib PUBLIC .)
 
 add_executable(gem-raider main.cpp)
+target_link_libraries(gem-raider-lib ${SDL2_LIBRARIES})
 target_link_libraries(
   gem-raider
   gem-raider-lib
-  ${SDL2_LIBRARIES}
 )
