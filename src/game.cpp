@@ -1,8 +1,8 @@
-#include "gem-raider/game.hpp"
+#include <gem-raider/game.hpp>
 
 #include <iostream>
 
-#include "gem-raider/constants.hpp"
+#include <gem-raider/constants.hpp>
 
 namespace gem_raider {
 

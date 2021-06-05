@@ -1,4 +1,4 @@
-#include "gem-raider/sdl_util.hpp"
+#include <gem-raider/sdl_util.hpp>
 
 namespace gem_raider {
 std::string getResPath() {

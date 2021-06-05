@@ -1,9 +1,9 @@
-#include "gem-raider/board.hpp"
+#include <gem-raider/board.hpp>
 
 #include <cassert>
 #include <iostream>
 
-#include "gem-raider/constants.hpp"
+#include <gem-raider/constants.hpp>
 
 namespace gem_raider {
 

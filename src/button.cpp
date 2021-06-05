@@ -1,7 +1,7 @@
-#include "gem-raider/button.hpp"
+#include <gem-raider/button.hpp>
 
-#include "gem-raider/game.hpp"
-#include "gem-raider/sdl_util.hpp"
+#include <gem-raider/game.hpp>
+#include <gem-raider/sdl_util.hpp>
 
 namespace gem_raider {
 [[nodiscard]] bool Button::draw(SDL_Renderer *renderer) {

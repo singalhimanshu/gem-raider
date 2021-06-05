@@ -1,4 +1,4 @@
-#include "gem-raider/board.hpp"
+#include <gem-raider/board.hpp>
 
 #include <gtest/gtest.h>
 

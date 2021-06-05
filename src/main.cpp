@@ -5,9 +5,9 @@
 #include <iostream>
 #include <string>
 
-#include "gem-raider/board.hpp"
-#include "gem-raider/constants.hpp"
-#include "gem-raider/game.hpp"
+#include <gem-raider/board.hpp>
+#include <gem-raider/constants.hpp>
+#include <gem-raider/game.hpp>
 
 constexpr int fps = 60;
 
