@@ -6,8 +6,8 @@ project(gem-raider CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-add_library(project_options INTERFACE)
-target_compile_features(project_options INTERFACE cxx_std_17)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 add_subdirectory(src)
 add_subdirectory(test)

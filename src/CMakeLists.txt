@@ -17,10 +17,11 @@ add_library(
   gem-raider/sdl_util.hpp
 )
 
+target_include_directories(gem-raider-lib PUBLIC .)
+
 add_executable(gem-raider main.cpp)
 target_link_libraries(
   gem-raider
-  PRIVATE project_options
   gem-raider-lib
-  PRIVATE ${SDL2_LIBRARIES}
+  ${SDL2_LIBRARIES}
 )

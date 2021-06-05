@@ -5,16 +5,14 @@ add_executable(
   board_test.cpp
 )
 
-target_include_directories(
-  gem-raider-test
-  PUBLIC
-  ${PROJECT_SOURCE_DIR}/vendor/googletest/googletest/include
-  ${PROJECT_SOURCE_DIR}/src
-)
-
 target_link_libraries(
   gem-raider-test
   gem-raider-lib
   ${SDL2_LIBRARIES}
   gtest_main
+)
+
+add_test(
+  NAME gem-raider-test
+  COMMAND gem-raider-test
 )
