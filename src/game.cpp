@@ -30,7 +30,9 @@ void Game::init(const char *title) {
   this->m_board.init();
   this->m_board.fill();
   this->m_reset_button =
-      std::move(Button(100, 30, "RESET(r)", window::width - 100, 0));
+      std::move(Button(100, 30, "RESET(r)", window::width - 210, 0));
+  this->m_quit_button =
+      std::move(Button(100, 30, "QUIT(q)", window::width - 105, 0));
   this->m_is_running = true;
 }
 
@@ -59,6 +61,10 @@ void Game::update() {
           case SDLK_r:
             this->reset();
             break;
+          case SDLK_q:
+            this->m_is_running = false;
+            return;
+            break;
         }
         break;
       }
@@ -69,6 +75,8 @@ void Game::update() {
             int y_pos = event.button.y;
             if (this->m_reset_button.is_clicked(x_pos, y_pos)) {
               this->reset();
+            } else if (this->m_quit_button.is_clicked(x_pos, y_pos)) {
+              this->m_is_running = false;
             }
             break;
           }
@@ -86,6 +94,12 @@ void Game::update() {
   SDL_RenderClear(this->m_renderer.get());
   if (!this->m_reset_button.draw(this->m_renderer.get())) {
     std::cerr << "Failed to draw reset button, Error:" << SDL_GetError()
+              << std::endl;
+    this->m_is_running = false;
+    return;
+  }
+  if (!this->m_quit_button.draw(this->m_renderer.get())) {
+    std::cerr << "Failed to draw quit button, Error:" << SDL_GetError()
               << std::endl;
     this->m_is_running = false;
     return;

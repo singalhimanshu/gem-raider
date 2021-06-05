@@ -52,7 +52,7 @@ class Button {
   }
 
   [[nodiscard]] bool draw(SDL_Renderer *renderer);
-  bool is_clicked(uint16_t x_click_pos, uint16_t y_click_pos) {
+  bool is_clicked(int x_click_pos, int y_click_pos) {
     return ((x_click_pos >= this->m_x_pos) && (y_click_pos >= this->m_y_pos) &&
             (x_click_pos <= (this->m_x_pos + this->m_width)) &&
             (y_click_pos <= (this->m_y_pos + this->m_height)));

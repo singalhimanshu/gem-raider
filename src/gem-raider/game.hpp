@@ -25,5 +25,6 @@ class Game {
   Board m_board;
   bool m_is_running{false};
   Button m_reset_button;
+  Button m_quit_button;
 };
 }  // namespace gem_raider
