@@ -1,9 +1,7 @@
-#include <gem-raider/board.hpp>
-
 #include <cassert>
-#include <iostream>
-
+#include <gem-raider/board.hpp>
 #include <gem-raider/constants.hpp>
+#include <iostream>
 
 namespace gem_raider {
 
@@ -59,41 +57,23 @@ Type Board::getTileType(std::uint8_t row, std::uint8_t col) {
 
 [[nodiscard]] bool Board::moveTile(std::uint8_t row, std::uint8_t col,
                                    Direction direction) {
-  if (this->m_isOutOfBounds(row, col)) {
+  if (this->m_isOutOfBounds(row, col) || !this->m_isTileMoveable(row, col)) {
     return false;
   }
   bool moved = false;
   switch (direction) {
-    case Direction::left: {
-      if (getTileType(row, col - 1) == Type::empty) {
-        std::swap(this->m_tiles[row][col], this->m_tiles[row][col - 1]);
-        moved = true;
-      }
+    case Direction::left:
+      moved = this->m_moveTileHelper(row, col, row, col - 1);
       break;
-    }
-    case Direction::right: {
-      std::size_t col_size = this->m_tiles[0].size();
-      if (getTileType(row, col + 1) == Type::empty) {
-        std::swap(this->m_tiles[row][col], this->m_tiles[row][col + 1]);
-        moved = true;
-      }
+    case Direction::right:
+      moved = this->m_moveTileHelper(row, col, row, col + 1);
       break;
-    }
-    case Direction::up: {
-      if (getTileType(row - 1, col) == Type::empty) {
-        std::swap(this->m_tiles[row][col], this->m_tiles[row - 1][col]);
-        moved = true;
-      }
+    case Direction::up:
+      moved = this->m_moveTileHelper(row, col, row - 1, col);
       break;
-    }
-    case Direction::down: {
-      std::size_t row_size = this->m_tiles.size();
-      if (getTileType(row + 1, col) == Type::empty) {
-        std::swap(this->m_tiles[row][col], this->m_tiles[row + 1][col]);
-        moved = true;
-      }
+    case Direction::down:
+      moved = this->m_moveTileHelper(row, col, row + 1, col);
       break;
-    }
     default:
       break;
   }
