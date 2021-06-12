@@ -16,6 +16,7 @@ class Game {
   void update();
   [[nodiscard]] bool is_running() { return this->m_is_running; }
   void reset();
+  void startGame() {this->m_is_running = true;}
 
  private:
   std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> m_window{

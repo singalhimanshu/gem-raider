@@ -33,7 +33,6 @@ void Game::init(const char *title) {
       std::move(Button(100, 30, "RESET(r)", window::width - 210, 0));
   this->m_quit_button =
       std::move(Button(100, 30, "QUIT(q)", window::width - 105, 0));
-  this->m_is_running = true;
 }
 
 void Game::update() {

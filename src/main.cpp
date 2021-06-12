@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
 
   Uint32 frame_time = 0;
   Uint32 elapsed = 0;
+  game.startGame();
   while (game.is_running()) {
     elapsed = SDL_GetTicks();
     game.update();
