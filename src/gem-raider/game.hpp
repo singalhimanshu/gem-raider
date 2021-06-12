@@ -14,7 +14,7 @@ class Game {
   virtual ~Game() { TTF_Quit(); };
   void init(const char *title);
   void update();
-  [[nodiscard]] inline bool is_running() { return this->m_is_running; }
+  [[nodiscard]] bool is_running() { return this->m_is_running; }
   void reset();
 
  private:
