@@ -36,11 +36,15 @@ void Game::init(const char *title) {
 }
 
 void Game::update() {
+  if (this->m_is_game_time_over()) {
+    std::cout << "TIME UP!\n";
+    return;
+  }
   SDL_Event event;
   if (SDL_PollEvent(&event) != 0) {
     switch (event.type) {
       case SDL_QUIT:
-        this->m_is_running = false;
+          this->stop();
         return;
         break;
       case SDL_KEYDOWN: {
@@ -61,7 +65,7 @@ void Game::update() {
             this->reset();
             break;
           case SDLK_q:
-            this->m_is_running = false;
+            this->stop();
             return;
             break;
         }
@@ -75,7 +79,7 @@ void Game::update() {
             if (this->m_reset_button.is_clicked(x_pos, y_pos)) {
               this->reset();
             } else if (this->m_quit_button.is_clicked(x_pos, y_pos)) {
-              this->m_is_running = false;
+              this->stop();
             }
             break;
           }
@@ -86,7 +90,7 @@ void Game::update() {
     }
   }
   if (this->m_board.dest_reached) {
-    this->m_is_running = false;
+      this->stop();
     std::cout << "game over" << std::endl;
     return;
   }
@@ -94,19 +98,19 @@ void Game::update() {
   if (!this->m_reset_button.draw(this->m_renderer.get())) {
     std::cerr << "Failed to draw reset button, Error:" << SDL_GetError()
               << std::endl;
-    this->m_is_running = false;
+    this->stop();
     return;
   }
   if (!this->m_quit_button.draw(this->m_renderer.get())) {
     std::cerr << "Failed to draw quit button, Error:" << SDL_GetError()
               << std::endl;
-    this->m_is_running = false;
+    this->stop();
     return;
   }
   if (!this->m_board.draw(this->m_renderer.get())) {
     std::cerr << "Failed to draw tile map, Error:" << SDL_GetError()
               << std::endl;
-    this->m_is_running = false;
+    this->stop();
     return;
   }
   SDL_RenderPresent(this->m_renderer.get());
