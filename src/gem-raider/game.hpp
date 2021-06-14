@@ -6,18 +6,24 @@
 
 #include "board.hpp"
 #include "button.hpp"
+#include "game_timer.hpp"
+#include "progress_bar.hpp"
+#include "timer.hpp"
 
 namespace gem_raider {
 class Game {
  public:
-  Game() = default;
+  explicit Game(Timer &timer) : m_game_timer(timer) {}
   virtual ~Game() { TTF_Quit(); };
   void init(const char *title);
   void update();
-  [[nodiscard]] bool is_running() { return this->m_is_running; }
+  [[nodiscard]] bool is_running() {
+    return !this->is_game_time_over() && this->m_is_running;
+  }
   void reset();
-  void startGame() {this->m_is_running = true;}
+  void start() { this->m_is_running = true; }
   void stop() { this->m_is_running = false; }
+  [[nodiscard]] bool is_game_time_over();
 
  private:
   std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> m_window{
@@ -28,5 +34,7 @@ class Game {
   bool m_is_running{false};
   Button m_reset_button;
   Button m_quit_button;
+  Timer &m_game_timer;
+  ProgressBar m_time_progress_bar;
 };
 }  // namespace gem_raider

@@ -26,7 +26,8 @@ namespace gem_raider {
 
 [[nodiscard]] SDL_Texture *Button::m_render_text(SDL_Renderer *renderer) {
   std::string font_path = getResPath() + "dpcomic.ttf";
-  TTF_Font *font = TTF_OpenFont(font_path.c_str(), 25);
+  // TODO(singalhimanshu): Take font size as input
+  TTF_Font *font = TTF_OpenFont(font_path.c_str(), 20);
   if (font == nullptr) {
     std::cerr << "Cannot load font, Error: " << SDL_GetError() << std::endl;
     return nullptr;
@@ -40,6 +41,7 @@ namespace gem_raider {
               << std::endl;
     return nullptr;
   }
+  // TODO(singalhimanshu): Center text to button
   SDL_Texture *font_texture =
       SDL_CreateTextureFromSurface(renderer, font_surface);
   if (font_texture == nullptr) {

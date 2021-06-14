@@ -30,21 +30,24 @@ void Game::init(const char *title) {
   this->m_board.init();
   this->m_board.fill();
   this->m_reset_button =
-      std::move(Button(100, 30, "RESET(r)", window::width - 210, 0));
+      std::move(Button(100, 25, "RESET(r)", window::width - 210, 5));
   this->m_quit_button =
-      std::move(Button(100, 30, "QUIT(q)", window::width - 105, 0));
+      std::move(Button(100, 25, "QUIT(q)", window::width - 105, 5));
+  this->m_time_progress_bar = std::move(ProgressBar(
+      window::width - 220, 5, 100, 25, SDL_Color{91, 140, 252, 255},
+      SDL_Color{255, 188, 7, 255}, /*m_reduce_right_to_left=*/true));
 }
 
 void Game::update() {
-  if (this->m_is_game_time_over()) {
-    std::cout << "TIME UP!\n";
+  if (this->is_game_time_over()) {
+    this->stop();
     return;
   }
   SDL_Event event;
   if (SDL_PollEvent(&event) != 0) {
     switch (event.type) {
       case SDL_QUIT:
-          this->stop();
+        this->stop();
         return;
         break;
       case SDL_KEYDOWN: {
@@ -90,7 +93,7 @@ void Game::update() {
     }
   }
   if (this->m_board.dest_reached) {
-      this->stop();
+    this->stop();
     std::cout << "game over" << std::endl;
     return;
   }
@@ -107,6 +110,11 @@ void Game::update() {
     this->stop();
     return;
   }
+  if (!this->m_time_progress_bar.draw(this->m_renderer.get(),
+                                      this->m_game_timer.getTimePercent())) {
+    std::cerr << "Failed to draw progress bar, Error: " << SDL_GetError();
+    return;
+  }
   if (!this->m_board.draw(this->m_renderer.get())) {
     std::cerr << "Failed to draw tile map, Error:" << SDL_GetError()
               << std::endl;
@@ -118,5 +126,13 @@ void Game::update() {
 }
 
 void Game::reset() { this->m_board.reset(); }
+
+[[nodiscard]] bool Game::is_game_time_over() {
+  bool time_up = this->m_game_timer.isTimeUp();
+  if (time_up) {
+    std::cout << "TIME UP!\n";
+  }
+  return time_up;
+}
 
 }  // namespace gem_raider

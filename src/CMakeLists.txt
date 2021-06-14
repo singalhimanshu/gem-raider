@@ -9,12 +9,17 @@ add_library(
   game.cpp
   button.cpp
   sdl_util.cpp
+  progress_bar.cpp
+  game_timer.cpp
   gem-raider/tile.hpp
   gem-raider/constants.hpp
   gem-raider/board.hpp
   gem-raider/game.hpp
   gem-raider/button.hpp
   gem-raider/sdl_util.hpp
+  gem-raider/progress_bar.hpp
+  gem-raider/timer.hpp
+  gem-raider/game_timer.hpp
 )
 
 target_include_directories(gem-raider-lib PUBLIC .)
