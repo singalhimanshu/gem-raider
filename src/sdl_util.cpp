@@ -16,4 +16,14 @@ std::string getResPath() {
   res_path += "res/";
   return res_path;
 }
+
+TTF_Font *getFont(const std::string &font_name, int font_size) {
+  std::string font_path = getResPath() + font_name;
+  TTF_Font *font = TTF_OpenFont(font_path.c_str(), font_size);
+  if (font == nullptr) {
+    std::cerr << "Cannot open font, ERROR: " << TTF_GetError() << '\n';
+    return nullptr;
+  }
+  return font;
+}
 }  // namespace gem_raider

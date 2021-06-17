@@ -46,4 +46,9 @@ const std::string raw_board =
 100000000000001\
 111111141111111";
 }
+
+namespace font {
+const std::string dpcomic = "dpcomic.ttf";
+}
+
 }  // namespace gem_raider

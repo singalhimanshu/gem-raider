@@ -5,6 +5,8 @@ add_executable(
   board_test.cpp
   game_test.cpp
   spy_timer.cpp
+  button_test.cpp
+  sdl_util_test.cpp
   gem-raider/spy_timer.hpp
 )
 
