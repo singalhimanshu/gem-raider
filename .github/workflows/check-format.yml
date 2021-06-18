@@ -1,0 +1,17 @@
+name: check format
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: DoozyX/clang-format-lint-action@v0.12
+        with:
+          source: '.'
+          exclude: './vendor'
+          clangFormatVersion: 9
