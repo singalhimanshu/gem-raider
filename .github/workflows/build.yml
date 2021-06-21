@@ -1,0 +1,28 @@
+name: Release build
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Create Build Directory
+              run: |
+                  cmake -E make_directory ${{github.workspace}}/build
+
+            - name: Install Packages
+              run: |
+                  sudo apt update -qq
+                  sudo apt install -y cmake clang ninja-build
+                  sudo apt install -y libsdl2-dev libsdl2-ttf-dev
+
+            - name: Configure CMake
+              run: CC=clang CXX= clang++ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+            - name: Build
+              run: ninja -C build
