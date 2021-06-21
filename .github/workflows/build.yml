@@ -22,7 +22,7 @@ jobs:
                   mkdir -p ${{github.workspace}}/build
 
             - name: Configure CMake
-              run: CC=clang CXX= clang++ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+              run: CC=clang CXX=clang++ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 
             - name: Build
               run: ninja -C build
