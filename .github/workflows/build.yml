@@ -14,7 +14,7 @@ jobs:
             - name: Install Packages
               run: |
                   sudo apt update -qq
-                  sudo apt install -y cmake clang ninja-build
+                  sudo apt install -y cmake gcc ninja-build
                   sudo apt install -y libsdl2-dev libsdl2-ttf-dev
 
             - name: Create Build Directory
@@ -22,7 +22,7 @@ jobs:
                   mkdir -p ${{github.workspace}}/build
 
             - name: Configure CMake
-              run: CC=clang CXX=clang++ cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+              run: CC=gcc CXX=g++ cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 
             - name: Build
               run: ninja -C build
