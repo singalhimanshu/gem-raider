@@ -3,10 +3,10 @@ cmake_minimum_required(VERSION 3.15)
 add_executable(
   gem-raider-test
   board_test.cpp
-  game_test.cpp
-  spy_timer.cpp
   button_test.cpp
+  game_test.cpp
   sdl_util_test.cpp
+  spy_timer.cpp
   gem-raider/spy_timer.hpp
 )
 
