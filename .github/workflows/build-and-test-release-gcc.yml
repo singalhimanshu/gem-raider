@@ -1,4 +1,4 @@
-name: Release build
+name: Build and test Release gcc
 on:
   push:
   pull_request:
@@ -26,3 +26,6 @@ jobs:
 
             - name: Build
               run: ninja -C build
+
+            - name: Test
+              run: ./build/gem-raider-test --gtest_break_on_failure
