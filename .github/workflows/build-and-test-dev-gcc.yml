@@ -1,0 +1,31 @@
+name: Build and test Dev gcc
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Install Packages
+              run: |
+                  sudo apt update -qq
+                  sudo apt install -y cmake gcc ninja-build
+                  sudo apt install -y libsdl2-dev libsdl2-ttf-dev
+
+            - name: Create Build Directory
+              run: |
+                  mkdir -p ${{github.workspace}}/build
+
+            - name: Configure CMake
+              run: CC=gcc CXX=g++ cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
+
+            - name: Build
+              run: ninja -C build
+
+            - name: Test
+              run: ./build/gem-raider-test --gtest_break_on_failure
