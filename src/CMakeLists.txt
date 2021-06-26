@@ -1,6 +1,5 @@
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(SDL2 REQUIRED sdl2 SDL2_ttf)
-include_directories(${SDL2_INCLUDE_DIRS})
 
 add_library(
   gem-raider-lib
@@ -22,7 +21,7 @@ add_library(
   gem-raider/game_timer.hpp
 )
 
-target_include_directories(gem-raider-lib PUBLIC .)
+target_include_directories(gem-raider-lib PUBLIC . ${SDL2_INCLUDE_DIRS})
 
 add_executable(gem-raider main.cpp)
 target_link_libraries(gem-raider-lib ${SDL2_LIBRARIES})
