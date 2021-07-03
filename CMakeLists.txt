@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.15)
 
-set (CMAKE_CXX_STANDARD 17)
+if (cxx_std_20 IN_LIST CMAKE_CXX_COMPILE_FEATURES)
+  set (CMAKE_CXX_STANDARD 20)
+else ()
+  set (CMAKE_CXX_STANDARD 17)
+endif ()
 
 project(gem-raider CXX)
 
