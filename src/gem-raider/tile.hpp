@@ -21,8 +21,8 @@ struct Color {
 class Tile {
  public:
   Type type;
-  Tile() = default;
-  Tile(Type _type, std::uint8_t _row, std::uint8_t _col)
+  explicit Tile() = default;
+  explicit Tile(Type _type, std::uint8_t _row, std::uint8_t _col)
       : type(_type), m_row(_row), m_col(_col) {
     assert((_row < tile::rows) && (_col < tile::cols));
     switch (_type) {
@@ -58,41 +58,13 @@ class Tile {
       }
     }
   }
-
   virtual ~Tile() = default;
 
-  Tile(const Tile &other)
-      : type(other.type),
-        m_row(other.m_row),
-        m_col(other.m_col),
-        m_color(other.m_color) {}
+  Tile(const Tile &other) noexcept = default;
+  Tile &operator=(const Tile &other) noexcept = default;
 
-  // TODO: See if copy-swap idiom is possible
-  Tile &operator=(const Tile &other) noexcept {
-    if (this != &other) {
-      this->type = other.type;
-      this->m_row = other.m_row;
-      this->m_col = other.m_col;
-      this->m_color = other.m_color;
-    }
-    return *this;
-  }
-
-  Tile(Tile &&other) noexcept
-      : type(std::move(other.type)),
-        m_row(std::move(other.m_row)),
-        m_col(std::move(other.m_col)),
-        m_color(std::move(other.m_color)) {}
-
-  Tile &operator=(Tile &&other) noexcept {
-    if (&other != this) {
-      this->type = std::move(other.type);
-      this->m_row = std::move(other.m_row);
-      this->m_col = std::move(other.m_col);
-      this->m_color = std::move(other.m_color);
-    }
-    return *this;
-  }
+  Tile(Tile &&other) noexcept = default;
+  Tile &operator=(Tile &&other) noexcept = default;
 
   [[nodiscard]] Color getColor() const noexcept { return this->m_color; }
   friend std::ostream &operator<<(std::ostream &out, const Tile &tile);

@@ -20,13 +20,8 @@ class Board {
   Board(const Board &board) = default;
   Board &operator=(const Board &board) = default;
 
-  Board(Board &&other) noexcept : m_tiles(std::move(other.m_tiles)) {}
-  Board &operator=(Board &&board) noexcept {
-    if (&board != this) {
-      this->m_tiles = std::move(board.m_tiles);
-    }
-    return *this;
-  }
+  Board(Board &&other) noexcept = default;
+  Board &operator=(Board &&board) noexcept = default;
 
   void init() noexcept;
   void fill() noexcept;

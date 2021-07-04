@@ -15,6 +15,13 @@ class Game {
  public:
   explicit Game(Timer &timer) : m_game_timer(timer) {}
   virtual ~Game() { TTF_Quit(); };
+
+  Game(const Game &game) = default;
+  Game &operator=(const Game &game) = default;
+
+  Game(Game &&game) = default;
+  Game &operator=(Game &&game) = default;
+
   void init(const char *title);
   void update();
   [[nodiscard]] bool is_running() {

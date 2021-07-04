@@ -8,23 +8,11 @@ class Timer {
   explicit Timer(Uint32 end_time) : m_end_time(end_time) {}
   virtual ~Timer() = default;
 
-  Timer(const Timer &timer) = default;
-  Timer &operator=(const Timer &timer) noexcept {
-    if (this != &timer) {
-      this->m_start_time = timer.m_start_time;
-      this->m_end_time = timer.m_end_time;
-    }
-    return *this;
-  }
+  Timer(const Timer &timer) noexcept = default;
+  Timer &operator=(const Timer &timer) noexcept = default;
 
   Timer(Timer &&timer) = default;
-  Timer &operator=(Timer &&timer) noexcept {
-    if (this != &timer) {
-      this->m_start_time = std::move(timer.m_start_time);
-      this->m_end_time = std::move(timer.m_end_time);
-    }
-    return *this;
-  }
+  Timer &operator=(Timer &&timer) noexcept = default;
 
   virtual void start() = 0;
   virtual Uint32 getTicks() const = 0;
