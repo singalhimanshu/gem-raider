@@ -14,8 +14,7 @@ constexpr int fps = 60;
 
 int main(int argc, char *argv[]) {
   Uint32 game_time = 60000;
-  gem_raider::GameTimer game_timer(game_time);
-  gem_raider::Game game(game_timer);
+  gem_raider::Game game(std::make_shared<gem_raider::GameTimer>(game_time));
   game.init("gem-raider");
 
   Uint32 frame_time = 0;

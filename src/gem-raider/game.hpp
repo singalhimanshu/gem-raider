@@ -13,11 +13,11 @@
 namespace gem_raider {
 class Game {
  public:
-  explicit Game(Timer &timer) : m_game_timer(timer) {}
+  explicit Game(std::shared_ptr<Timer> timer) : m_game_timer(timer) {}
   virtual ~Game() { TTF_Quit(); };
 
-  Game(const Game &game) = default;
-  Game &operator=(const Game &game) = default;
+  Game(const Game &game) = delete;
+  Game &operator=(const Game &game) = delete;
 
   Game(Game &&game) = default;
   Game &operator=(Game &&game) = default;
@@ -41,7 +41,7 @@ class Game {
   bool m_is_running{false};
   Button m_reset_button;
   Button m_quit_button;
-  Timer &m_game_timer;
+  std::shared_ptr<Timer> m_game_timer;
   ProgressBar m_time_progress_bar;
 };
 }  // namespace gem_raider

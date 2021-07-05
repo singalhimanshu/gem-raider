@@ -116,7 +116,7 @@ void Game::update() {
     return;
   }
   if (!this->m_time_progress_bar.draw(this->m_renderer.get(),
-                                      this->m_game_timer.getTimePercent())) {
+                                      this->m_game_timer->getTimePercent())) {
     std::cerr << "Failed to draw progress bar, Error: " << SDL_GetError();
     return;
   }
@@ -133,7 +133,7 @@ void Game::update() {
 void Game::reset() { this->m_board.reset(); }
 
 [[nodiscard]] bool Game::is_game_time_over() {
-  bool time_up = this->m_game_timer.isTimeUp();
+  bool time_up = this->m_game_timer->isTimeUp();
   if (time_up) {
     std::cout << "TIME UP!\n";
   }

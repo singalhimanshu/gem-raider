@@ -12,7 +12,7 @@ class GameTimer : public Timer {
   GameTimer(const GameTimer &game_timer) = default;
   GameTimer &operator=(const GameTimer &game_timer) = default;
 
-  GameTimer(const GameTimer &&game_timer) = default;
+  GameTimer(GameTimer &&game_timer) = default;
   GameTimer &operator=(GameTimer &&game_timer) = default;
 
   void start() override;
