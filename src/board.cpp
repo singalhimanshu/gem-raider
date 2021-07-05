@@ -24,7 +24,7 @@ void Board::fill() noexcept {
         this->m_player_row = r;
         this->m_player_col = c;
       }
-      this->m_tiles[r][c] = std::move(Tile(type, r, c));
+      this->m_tiles[r][c] = Tile(type, r, c);
       raw_board_idx++;
     }
   }

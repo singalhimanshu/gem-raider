@@ -31,14 +31,14 @@ void Game::init(const char *title) {
   this->m_board.init();
   this->m_board.fill();
   this->m_reset_button =
-      std::move(Button(window::width - 210, 5, 100, 25, "RESET(r)",
-                       SDL_Color{0, 0, 0, 255}, SDL_Color{255, 255, 255, 255}));
+      Button(window::width - 210, 5, 100, 25, "RESET(r)",
+             SDL_Color{0, 0, 0, 255}, SDL_Color{255, 255, 255, 255});
   this->m_quit_button =
-      std::move(Button(window::width - 105, 5, 100, 25, "QUIT(q)",
-                       SDL_Color{0, 0, 0, 255}, SDL_Color{255, 255, 255, 255}));
-  this->m_time_progress_bar = std::move(ProgressBar(
-      window::width - 220, 5, 100, 25, SDL_Color{91, 140, 252, 255},
-      SDL_Color{255, 188, 7, 255}, /*m_reduce_right_to_left=*/true));
+      Button(window::width - 105, 5, 100, 25, "QUIT(q)",
+             SDL_Color{0, 0, 0, 255}, SDL_Color{255, 255, 255, 255});
+  this->m_time_progress_bar =
+      ProgressBar(window::width - 220, 5, 100, 25, SDL_Color{91, 140, 252, 255},
+                  SDL_Color{255, 188, 7, 255}, /*m_reduce_right_to_left=*/true);
 }
 
 void Game::update() {
