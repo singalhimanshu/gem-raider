@@ -22,7 +22,7 @@ jobs:
                   mkdir -p ${{github.workspace}}/build
 
             - name: Configure CMake
-              run: CC=gcc CXX=g++ cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+              run: CC=gcc CXX=g++ CXXFLAG='-Wall -Wextra -pedantic' cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 
             - name: Build
               run: ninja -C build
